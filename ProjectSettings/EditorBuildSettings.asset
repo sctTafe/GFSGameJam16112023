@@ -6,18 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/ActualGameScenes/MainMenuScene.unity
-    guid: 1b770141adc2c2b409d45f72c2055935
+    path: Assets/Scott/BuildVersion1/Build_Level0.unity
+    guid: 7a678ca264fc2e240aa17934daafe9b9
   - enabled: 1
-    path: Assets/Scenes/ActualGameScenes/Level1.unity
-    guid: 49ffe3ee275fbad499552a0e5b8477e6
+    path: Assets/Scott/BuildVersion1/Build_Level1.unity
+    guid: bb78d2b8657715f4f97accdf063dd984
   - enabled: 1
-    path: Assets/Scenes/ActualGameScenes/Level2.unity
-    guid: efb5e986b594fa243b21df1847611ffa
-  - enabled: 1
-    path: Assets/Scenes/ActualGameScenes/Level3.unity
-    guid: d9fce649881d4f845ab9052be05ddb18
-  - enabled: 1
-    path: Assets/Scenes/ActualGameScenes/EndGameScene.unity
-    guid: 0aeb3d7009c996e4a9407f5a92fbcb41
+    path: Assets/Scott/BuildVersion1/Build_Level2.unity
+    guid: fd074103e4e12c945bc97a3920f17215
   m_configObjects: {}
