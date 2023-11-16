@@ -39,6 +39,6 @@ Material:
     m_Ints: []
     m_Floats:
     - _Fullscreen_DepthWrite: 0
-    - _Pixel_Size: 4
+    - _Pixel_Size: 6
     m_Colors: []
   m_BuildTextureStacks: []
