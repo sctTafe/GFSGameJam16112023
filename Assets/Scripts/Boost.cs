@@ -15,13 +15,4 @@ public class Boost : MonoBehaviour
     {
         
     }
-
-    void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Boost");
-        if (other.gameObject.tag == "Player")
-        {
-            Debug.Log("2Boost");
-        }
-    }
 }
