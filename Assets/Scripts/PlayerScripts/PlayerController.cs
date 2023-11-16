@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
                         Debug.Log("He can ball");
                         rb.AddForce(new Vector3(0, input.y, 0));
                         moveState = 1;
-                        DoJump(input.y);
+                        DoJump(input.y * jumpForce);
                     }
 
                     break;
@@ -111,12 +111,12 @@ public class PlayerController : MonoBehaviour
 
                     Vector3 perpendicularMove = new Vector3(movingDirection.x * -1, 0f, movingDirection.z);
 
-                    if (Physics.Raycast(transform.position, perpendicularMove, out hit, raycastDistance))
+                    if (Physics.Raycast(transform.position+Vector3.up, perpendicularMove, out hit, raycastDistance))
                     {
                     //     // Check if the hit object is a wall
                         WallRunCheck(hit);
                     }
-                    if (Physics.Raycast(transform.position, -perpendicularMove, out hit, raycastDistance))
+                    if (Physics.Raycast(transform.position+Vector3.up, -perpendicularMove, out hit, raycastDistance))
                     {
                     //     // Check if the hit object is a wall
                         WallRunCheck(hit);

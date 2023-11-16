@@ -912,7 +912,7 @@ MonoBehaviour:
   lookSpeed: 150
   moveSpeed: 40
   strafeSpeed: 10
-  jumpForce: 100
+  jumpForce: 60
   wallRunUpForce: 20
   strafeMod: 0.2
   raycastDistance: 0.96
