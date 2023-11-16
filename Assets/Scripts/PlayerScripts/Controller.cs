@@ -142,4 +142,8 @@ public class Controller : MonoBehaviour //interface MonoBehavior provides method
         yield return new WaitForSeconds(0.3f);
         canWallRun = true;
     }
+    public void fn_ZeroRigidBodyMomentum()
+    {
+        rb.velocity = Vector3.zero;
+    }
 }
