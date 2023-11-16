@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class Stomper : MonoBehaviour
 {
-    public GameObject stompObject;
+    public bool disabled = false;
+    public Animation stomp;
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(StompLoop());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator StompLoop()
     {
-        
+        while (true)
+        {
+            if (!disabled)
+            {
+                stomp.Play();
+            }
+            yield return new WaitForSeconds(stomp.clip.length + 0.1f);
+        }
     }
 }
