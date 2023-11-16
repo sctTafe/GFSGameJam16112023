@@ -83,7 +83,9 @@ public class PlayerController : MonoBehaviour
                 {
                     // Apply the run force to the rigidbody
                     if (rb.velocity.magnitude < MaxVel)
-                    rb.AddForce(forwardForce + sidewaysForce);
+                    {
+                         rb.AddForce(forwardForce + sidewaysForce * Time.deltaTime);
+                    }
 
                     if (canJump && moveState == 0 && input.y > 0)
                     {
@@ -100,15 +102,51 @@ public class PlayerController : MonoBehaviour
                     // Get the direction of the rigidbody's movement
                     Vector3 movingDirection = rb.velocity.normalized;
 
-                    Vector3 rayRight = (transform.forward + transform.right) * raycastDistance;
-                    Vector3 rayLeft = (transform.forward - transform.right) * raycastDistance;
-
                     RaycastHit hit;
                     if (Physics.Raycast(transform.position, Vector3.down, out hit, raycastDistanceFeet))
                     {
                         moveState = 0; // on ground
-                    }           
+                    }
 
+
+                    // WallRun Crap
+
+                    // if (Physics.Raycast(transform.position, movingDirection, out hit, raycastDistance))
+                    // {
+                    //     // Check if the hit object is a wall
+                    //     if (hit.collider.CompareTag("Wall"))
+                    //     {
+                    //         // Calculate the rotation to align with the wall normal
+                    //         Quaternion rotationToWall = Quaternion.FromToRotation(Vector3.up, hit.normal);
+                    // 
+                    //         // Calculate the angle between the character's forward direction and the wall normal
+                    //         float angleToWall = Vector3.Angle(transform.forward, hit.normal);
+                    // 
+                    //         // Set a threshold angle (adjust as needed)
+                    //         float thresholdAngle = 45f;
+                    // 
+                    //         // Check if the angle to the wall is within the threshold
+                    //         if (angleToWall < thresholdAngle)
+                    //         {
+                    //             // Apply the rotation around the Y-axis (up vector)
+                    //             transform.rotation = rotationToWall;
+                    // 
+                    //             // Ensure that the Z-axis remains at 0
+                    //             transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
+                    //         }
+                    // 
+                    //         // Apply upward force to skate along an arc
+                    //         Vector3 upwardForce = transform.up * wallRunUpForce * Time.deltaTime;
+                    //         rb.AddForce(upwardForce);
+                    // 
+                    //         // Apply forward force to keep moving along the wall
+                    //         Vector3 force = transform.forward * moveSpeed * Time.deltaTime;
+                    //         rb.AddForce(force);
+                    // 
+                    //         moveState = 2;
+                    //     }
+                    // }
+                
                     break;
                 }
             case 2: // OnWall
@@ -142,7 +180,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        virtualCam.m_Lens.FieldOfView = FOVBase + (rb.velocity.magnitude * FOVMod);
+        //virtualCam.m_Lens.FieldOfView = FOVBase + (rb.velocity.magnitude * FOVMod);
         //virtualCam.transform.localRotation.x = DutchMod * rb.velocity.x;
 
         CameraLook();
