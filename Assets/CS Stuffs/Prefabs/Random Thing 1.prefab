@@ -342,7 +342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2896728258262978893}
   m_Layer: 0
-  m_Name: Pipe Var 1
+  m_Name: Random Thing 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
