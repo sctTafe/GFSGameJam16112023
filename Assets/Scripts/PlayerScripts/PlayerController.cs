@@ -28,7 +28,7 @@ using UnityEngine.Rendering;
 public class PlayerController : MonoBehaviour
 {
     public GameObject cam;
-    public Cinemachine.CinemachineVirtualCamera virtualCam;
+    //public Cinemachine.CinemachineVirtualCamera virtualCam;
 
     private Rigidbody rb;
 
@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     public float rotationSpeed = 500;
     public float lookSpeed = 150;
     public float moveSpeed = 10;
+    public float strafeSpeed = 10;
     public float jumpForce = 10;
     public float wallRunUpForce = 400;
 
@@ -73,9 +74,8 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 input = GetInput();
 
-        Vector3 forwardForce = transform.forward * input.z * moveSpeed;
-        Vector3 sidewaysForce = transform.right * input.x * moveSpeed;
-
+        Vector3 forwardForce = transform.forward * input.z * moveSpeed * Time.deltaTime * 60f;
+        Vector3 sidewaysForce = transform.right * input.x * strafeSpeed * Time.deltaTime * 60f;
 
         switch (moveState)
         {
@@ -84,14 +84,15 @@ public class PlayerController : MonoBehaviour
                     // Apply the run force to the rigidbody
                     if (rb.velocity.magnitude < MaxVel)
                     {
-                         rb.AddForce(forwardForce + sidewaysForce * Time.deltaTime);
+                        rb.AddForce(forwardForce+sidewaysForce);
                     }
 
                     if (canJump && moveState == 0 && input.y > 0)
                     {
+                        Debug.Log("He can ball");
                         rb.AddForce(new Vector3(0, input.y, 0));
                         moveState = 1;
-                        //DoJump(input.y);
+                        DoJump(input.y);
                     }
 
                     break;
@@ -103,49 +104,24 @@ public class PlayerController : MonoBehaviour
                     Vector3 movingDirection = rb.velocity.normalized;
 
                     RaycastHit hit;
-                    if (Physics.Raycast(transform.position, Vector3.down, out hit, raycastDistanceFeet))
+                    if (Physics.Raycast(transform.position, Vector3.down, out hit, raycastDistanceFeet) && movingDirection.y <= 0f)
                     {
                         moveState = 0; // on ground
                     }
 
+                    Vector3 perpendicularMove = new Vector3(movingDirection.x * -1, 0f, movingDirection.z);
 
-                    // WallRun Crap
-
-                    // if (Physics.Raycast(transform.position, movingDirection, out hit, raycastDistance))
-                    // {
+                    if (Physics.Raycast(transform.position, perpendicularMove, out hit, raycastDistance))
+                    {
                     //     // Check if the hit object is a wall
-                    //     if (hit.collider.CompareTag("Wall"))
-                    //     {
-                    //         // Calculate the rotation to align with the wall normal
-                    //         Quaternion rotationToWall = Quaternion.FromToRotation(Vector3.up, hit.normal);
-                    // 
-                    //         // Calculate the angle between the character's forward direction and the wall normal
-                    //         float angleToWall = Vector3.Angle(transform.forward, hit.normal);
-                    // 
-                    //         // Set a threshold angle (adjust as needed)
-                    //         float thresholdAngle = 45f;
-                    // 
-                    //         // Check if the angle to the wall is within the threshold
-                    //         if (angleToWall < thresholdAngle)
-                    //         {
-                    //             // Apply the rotation around the Y-axis (up vector)
-                    //             transform.rotation = rotationToWall;
-                    // 
-                    //             // Ensure that the Z-axis remains at 0
-                    //             transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
-                    //         }
-                    // 
-                    //         // Apply upward force to skate along an arc
-                    //         Vector3 upwardForce = transform.up * wallRunUpForce * Time.deltaTime;
-                    //         rb.AddForce(upwardForce);
-                    // 
-                    //         // Apply forward force to keep moving along the wall
-                    //         Vector3 force = transform.forward * moveSpeed * Time.deltaTime;
-                    //         rb.AddForce(force);
-                    // 
-                    //         moveState = 2;
-                    //     }
-                    // }
+                        WallRunCheck(hit);
+                    }
+                    if (Physics.Raycast(transform.position, -perpendicularMove, out hit, raycastDistance))
+                    {
+                    //     // Check if the hit object is a wall
+                        WallRunCheck(hit);
+                    }
+
                 
                     break;
                 }
@@ -182,8 +158,12 @@ public class PlayerController : MonoBehaviour
 
         //virtualCam.m_Lens.FieldOfView = FOVBase + (rb.velocity.magnitude * FOVMod);
         //virtualCam.transform.localRotation.x = DutchMod * rb.velocity.x;
-
         CameraLook();
+    }
+
+    void WallRunCheck(RaycastHit hit)
+    {
+        Debug.Log("Wall Runnable");
     }
 
     void DoJump(float force)
@@ -195,9 +175,9 @@ public class PlayerController : MonoBehaviour
     Vector3 GetInput()
     {
         Vector3 inputOutput = Vector3.zero;
-        inputOutput.x = Input.GetAxis("Horizontal") * moveSpeed;
-        inputOutput.z = Input.GetAxis("Vertical") * moveSpeed;
-        inputOutput.y = Input.GetAxis("Jump") * jumpForce;
+        inputOutput.x = Input.GetAxis("Horizontal");
+        inputOutput.z = Mathf.Clamp(Input.GetAxis("Vertical"),-0.4f,1f);
+        inputOutput.y = Input.GetAxis("Jump");
         return inputOutput;
     }
 
@@ -207,18 +187,11 @@ public class PlayerController : MonoBehaviour
         float InputX = Input.GetAxis("Mouse X");
         float InputY = Input.GetAxis("Mouse Y");
 
-        // Update Cinemachine camera target pitch
-        TargetPitch -= InputY * rotationSpeed * Time.deltaTime;
-        // clamp our pitch rotation
-        TargetPitch = ClampAngle(TargetPitch, -89, 89);
+        float lookVelocity = InputY;// * lookSpeed * Time.deltaTime;
+        cam.transform.eulerAngles = cam.transform.eulerAngles - (Vector3.right * lookVelocity);
 
-        cam.transform.localRotation = Quaternion.Euler(TargetPitch, 0.0f, 0.0f);
-        
-        float lookVelocity = InputX * lookSpeed * Time.deltaTime;
-        cam.transform.Rotate(Vector3.up * lookVelocity);
-
-        float rotationVelocity = InputX * rotationSpeed * Time.deltaTime;
-        transform.Rotate(Vector3.up * rotationVelocity);
+        float rotationVelocity = InputX;// * rotationSpeed;
+        transform.eulerAngles = transform.eulerAngles + Vector3.up * rotationVelocity;
     }
 
 
