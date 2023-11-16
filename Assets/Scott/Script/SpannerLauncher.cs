@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class SpannerLauncher : MonoBehaviour
 {
+    public Transform _cammeraTransform;
+    public Vector3 _launcherOffset;
     public GameObject _spannerPrefab;
     public float _launchForce = 10f;
     public float _arcHeight = 2f;
+
+
+    private void Start()
+    {
+        _cammeraTransform = Camera.main.transform;
+    }
 
     void Update()
     {
@@ -15,6 +23,7 @@ public class SpannerLauncher : MonoBehaviour
         {
             LaunchProjectile();
         }
+        transform.position = _cammeraTransform.position;
     }
 
     void LaunchProjectile()
@@ -27,7 +36,7 @@ public class SpannerLauncher : MonoBehaviour
         mousePosition.z = Camera.main.transform.position.z;
         Vector3 targetPosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        Vector3 launchDirection = (transform.position - targetPosition).normalized;
+        Vector3 launchDirection = (targetPosition - transform.position).normalized;
 
         Debug.DrawRay(transform.position, launchDirection*100, Color.green, 5f);
 
