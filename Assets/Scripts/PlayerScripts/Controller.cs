@@ -89,11 +89,11 @@ public class Controller : MonoBehaviour //interface MonoBehavior provides method
             isWallRunning = false;
         }
 
-        camRot -= localEulerAnglesInput.y * Time.deltaTime * cs;
+        camRot -= localEulerAnglesInput.y * cs;
         camRot = Mathf.Clamp(camRot, -70, 70);
         isGrounded = Physics.Raycast(transform.position, -transform.up, 1.1f, ground);
         rb.velocity += transform.forward * movementInput.y * cms * Time.deltaTime + transform.right * movementInput.x * cms * Time.deltaTime;
-        transform.localEulerAngles += new Vector3(0, localEulerAnglesInput.x, 0) * Time.deltaTime * cs;
+        transform.localEulerAngles += new Vector3(0, localEulerAnglesInput.x, 0) * cs;
         playerCam.localEulerAngles = new Vector3(camRot, playerCam.localEulerAngles.y, playerCam.localEulerAngles.z);
     }
 
