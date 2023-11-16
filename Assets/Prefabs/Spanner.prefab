@@ -148,6 +148,8 @@ GameObject:
   - component: {fileID: 7226742642067868560}
   - component: {fileID: 5748242173324921554}
   - component: {fileID: 8706259669131191958}
+  - component: {fileID: 2628407592268309486}
+  - component: {fileID: 3670709839227373261}
   m_Layer: 0
   m_Name: Spanner
   m_TagString: Spanner
@@ -228,6 +230,50 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2628407592268309486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4099760532154834023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45eab7ccd19540f4eb505977728d9fec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _OnDestruction:
+    m_PersistentCalls:
+      m_Calls: []
+  _OnSpannerCollision:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3670709839227373261}
+        m_TargetAssemblyTypeName: InstantiateParticleEffect, Assembly-CSharp
+        m_MethodName: fn_Instanciate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3670709839227373261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4099760532154834023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23df7704fe8f3244e8042d27a7c7d960, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _particaleffectPrefab: {fileID: 6192724089161036641, guid: afb79d84f55436f4b99e79ea2b2c8472,
+    type: 3}
 --- !u!1001 &5244178171002081777
 PrefabInstance:
   m_ObjectHideFlags: 0

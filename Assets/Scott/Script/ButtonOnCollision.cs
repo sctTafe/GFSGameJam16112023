@@ -28,8 +28,6 @@ public class ButtonOn : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
         _isWaiting = false;
-
-
     }
 
 }
