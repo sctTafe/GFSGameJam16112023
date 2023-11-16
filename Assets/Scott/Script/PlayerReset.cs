@@ -9,12 +9,15 @@ public class PlayerReset : MonoBehaviour
 
 
     private Transform _playerTransform;
-    private PlayerController _playerController;
+    private Controller _playerController;
     private Vector3 _resetPosition;
 
     // Start is called before the first frame update
     void Start()
     {
+        _playerController = GetComponent<Controller>();
+        _playerTransform = transform;
+
         if (_playerTransform == null)
         {
             _resetPosition = Vector3.zero;
@@ -23,10 +26,6 @@ public class PlayerReset : MonoBehaviour
         {
             _resetPosition = _spawnPoint.position;
         }
-        
-        _playerController = GetComponent<PlayerController>();
-        _playerTransform = transform;
-
     }
 
     // Update is called once per frame
@@ -41,6 +40,7 @@ public class PlayerReset : MonoBehaviour
     private void ResetPlayerToStart()
     {
         _playerTransform.position = _resetPosition;
+        ZeroRBMomentum();   
     }
 
     void ZeroRBMomentum()
