@@ -36,7 +36,7 @@ public class SpannerLauncher : MonoBehaviour
         mousePosition.z = Camera.main.transform.position.z;
         Vector3 targetPosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        Vector3 launchDirection = (targetPosition - transform.position).normalized;
+        Vector3 launchDirection = ( targetPosition - transform.position).normalized;
 
         Debug.DrawRay(transform.position, launchDirection*100, Color.green, 5f);
 

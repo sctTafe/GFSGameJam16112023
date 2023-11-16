@@ -128,6 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 097729609133b2f4799994f0d95c548d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cammeraTransform: {fileID: 0}
+  _launcherOffset: {x: 0, y: 2, z: 0}
   _spannerPrefab: {fileID: 4099760532154834023, guid: 1d9a5b4b8c64f33489896461e65f4f7d,
     type: 3}
   _launchForce: 20

@@ -13,8 +13,5 @@ EditorBuildSettings:
     guid: 5cb9b45dd8181c447bc73c6d01900c0f
   - enabled: 1
     path: Assets/Scott/BuildVersion1/Build_Level2.unity
-    guid: bb78d2b8657715f4f97accdf063dd984
-  - enabled: 1
-    path: Assets/Scott/BuildVersion1/Build_Level3.unity
-    guid: fd074103e4e12c945bc97a3920f17215
+    guid: 42cc625e32ceafc44be30be12ac9284b
   m_configObjects: {}
