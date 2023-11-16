@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Stomper : MonoBehaviour
 {
+    public float offset = 0f;
     public bool disabled = false;
     public Animation stomp;
     // Start is called before the first frame update
@@ -14,6 +15,7 @@ public class Stomper : MonoBehaviour
 
     IEnumerator StompLoop()
     {
+        yield return new WaitForSeconds(offset);
         while (true)
         {
             if (!disabled)
