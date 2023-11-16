@@ -130,5 +130,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spannerPrefab: {fileID: 4099760532154834023, guid: 1d9a5b4b8c64f33489896461e65f4f7d,
     type: 3}
-  _launchForce: 10
+  _launchForce: 20
   _arcHeight: 2
