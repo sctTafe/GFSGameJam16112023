@@ -18,7 +18,7 @@ public class PlayerReset : MonoBehaviour
         _playerController = GetComponent<Controller>();
         _playerTransform = transform;
 
-        if (_playerTransform == null)
+        if (_spawnPoint == null)
         {
             _resetPosition = Vector3.zero;
         }
