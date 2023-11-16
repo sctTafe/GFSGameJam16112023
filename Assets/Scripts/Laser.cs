@@ -34,6 +34,7 @@ public class Laser : MonoBehaviour
             if (hit.transform.tag == "Player")
             {
                 Debug.Log(hit.transform.name);
+                hit.transform.gameObject.GetComponent<PlayerReset>().fn_DeathByEnvrionment();
             }
         }
     }
