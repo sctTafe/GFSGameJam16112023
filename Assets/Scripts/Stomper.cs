@@ -23,4 +23,9 @@ public class Stomper : MonoBehaviour
             yield return new WaitForSeconds(stomp.clip.length + 0.1f);
         }
     }
+
+    public void fn_ToggleStomperOn()
+    {
+        disabled = !disabled;
+    }
 }
