@@ -202,4 +202,9 @@ public class PlayerController : MonoBehaviour
         return Mathf.Clamp(lfAngle, lfMin, lfMax);
     }
 
+
+    public void fn_ZeroRigidBodyMomentum()
+    {
+        rb.velocity = Vector3.zero;
+    }
 }
