@@ -1356,10 +1356,10 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 4.0,
+    "m_Value": 2.0,
     "m_FloatType": 1,
     "m_RangeValues": {
-        "x": 4.0,
+        "x": 2.0,
         "y": 256.0
     }
 }
