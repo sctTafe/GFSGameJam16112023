@@ -9,13 +9,13 @@ public class PlayerReset : MonoBehaviour
 
 
     private Transform _playerTransform;
-    private Controller _playerController;
+    private Rigidbody _rigidBody;
     private Vector3 _resetPosition;
 
     // Start is called before the first frame update
     void Start()
     {
-        _playerController = GetComponent<Controller>();
+        _rigidBody = GetComponent<Rigidbody>();
         _playerTransform = transform;
 
         if (_spawnPoint == null)
@@ -40,12 +40,13 @@ public class PlayerReset : MonoBehaviour
     private void ResetPlayerToStart()
     {
         _playerTransform.position = _resetPosition;
+        _playerTransform.rotation = Quaternion.identity;
         ZeroRBMomentum();   
     }
 
     void ZeroRBMomentum()
     {
-        _playerController.fn_ZeroRigidBodyMomentum();
+        _rigidBody.velocity = Vector3.zero;
     }
 
     public void fn_DeathByEnvrionment()
