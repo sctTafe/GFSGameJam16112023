@@ -73,9 +73,12 @@ public class PlayerController : MonoBehaviour
 
 
     public Transform orientation;
+    public Transform camera;
 
     float horizontalInput;
     float verticalInput;
+
+    private Vector3 grapplePos;
 
     Vector3 moveDirection;
 
@@ -117,6 +120,7 @@ public class PlayerController : MonoBehaviour
         MyInput();
         SpeedControl();
         StateHandler();
+        
         //TextStuff();
 
         if (state != MovementState.air)
@@ -183,6 +187,7 @@ public class PlayerController : MonoBehaviour
 
             crouching = false;
         }
+        
     }
 
     private void StateHandler()
