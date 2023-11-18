@@ -31,10 +31,9 @@ public class Laser : MonoBehaviour
         Vector3 dir = Vector3.Normalize(pos2.transform.position - pos1.transform.position);
         if (Physics.Raycast(pos1.transform.position, dir, out hit))
         {
-            if (hit.transform.tag == "Player")
+            if (hit.transform.CompareTag("Player"))
             {
-                Debug.Log(hit.transform.name);
-                hit.transform.gameObject.GetComponent<PlayerReset>().fn_DeathByEnvrionment();
+                GameManager.instance.PlayerDeath();
             }
         }
     }
