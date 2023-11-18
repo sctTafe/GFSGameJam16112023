@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyAroundCamera : MonoBehaviour
+public class Killzone : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,5 +15,13 @@ public class FlyAroundCamera : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            GameManager.instance.PlayerDeath();
+        }
     }
 }
