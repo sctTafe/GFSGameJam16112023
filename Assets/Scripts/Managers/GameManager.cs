@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Canvas canvas;
     [SerializeField] private GameObject spawnPoint;
 
-    private Controller player;
+    private PlayerController player;
 
     private float currentTime = 0f;
     private int score = 0;
@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         LevelManager.instance.HideCursor();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         collectibles = GameObject.FindGameObjectsWithTag("Collectible");
         
         ResetLevel();
@@ -58,8 +58,8 @@ public class GameManager : MonoBehaviour
         }
         
         //replace player
-        
-        player.fn_ZeroRigidBodyMomentum();
+
+        player.ResetVelocity();
         player.transform.position = spawnPoint.transform.position;
         player.transform.eulerAngles = spawnPoint.transform.eulerAngles;
         

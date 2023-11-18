@@ -347,6 +347,11 @@ public class PlayerController : MonoBehaviour
         exitingSlope = false;
     }
 
+    public void ResetVelocity()
+    { 
+        rb.velocity = Vector3.zero;
+    }
+
     public bool OnSlope()
     {
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
