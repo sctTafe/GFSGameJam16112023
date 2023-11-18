@@ -1,15 +1,10 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private GameObject spawnPoint;
     [Header("UI Stuff")]
     [SerializeField] private Canvas canvas;
-    [SerializeField] private TextMeshProUGUI timeText;
-    [SerializeField] private TextMeshProUGUI scoreText;
 
     private Controller player;
 
@@ -32,6 +27,7 @@ public class GameManager : MonoBehaviour
     
     void Start()
     {
+        LevelManager.instance.HideCursor();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>();
     }
 
@@ -40,20 +36,20 @@ public class GameManager : MonoBehaviour
     {
         currentTime += Time.deltaTime;
         
-        timeText.SetText("Time:" + currentTime.ToString("F2"));
-        scoreText.SetText("Score: " + score);
+        GUIManager.instance.UpdateGameText(currentTime,score);
     }
 
-    public void PlayerDeath()
+    public void ResetPlayer(Vector3 pos, Vector3 rot)
     {
-        Reset();
-    }
-    void Reset()
-    {
-        currentTime = 0f;
-        score = 0;
         player.fn_ZeroRigidBodyMomentum();
-        player.gameObject.transform.position = spawnPoint.transform.position;
+        player.transform.position = pos;
+        player.transform.eulerAngles = rot;
+    }
+    public void ResetLevel()
+    {
+        LevelManager.instance.RestartLevel();
+        score = 0;
+        currentTime = 0f;
     }
 
     public void CollectPickup(int value)

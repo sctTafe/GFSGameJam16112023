@@ -33,7 +33,7 @@ public class Laser : MonoBehaviour
         {
             if (hit.transform.CompareTag("Player"))
             {
-                GameManager.instance.PlayerDeath();
+                GameManager.instance.ResetLevel();
             }
         }
     }
