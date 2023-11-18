@@ -21,7 +21,7 @@ public class Killzone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.instance.PlayerDeath();
+            GameManager.instance.ResetLevel();
         }
     }
 }

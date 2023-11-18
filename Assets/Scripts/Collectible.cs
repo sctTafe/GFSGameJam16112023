@@ -22,7 +22,7 @@ public class Collectible : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             GameManager.instance.CollectPickup(value);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
