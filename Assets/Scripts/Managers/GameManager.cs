@@ -5,11 +5,15 @@ public class GameManager : MonoBehaviour
 {
     [Header("UI Stuff")]
     [SerializeField] private Canvas canvas;
+    [SerializeField] private GameObject spawnPoint;
 
     private Controller player;
 
     private float currentTime = 0f;
     private int score = 0;
+    
+    
+    private GameObject[] collectibles;
     
     public static GameManager instance;
 
@@ -29,6 +33,9 @@ public class GameManager : MonoBehaviour
     {
         LevelManager.instance.HideCursor();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>();
+        collectibles = GameObject.FindGameObjectsWithTag("Collectible");
+        
+        ResetLevel();
     }
 
     // Update is called once per frame
@@ -39,17 +46,28 @@ public class GameManager : MonoBehaviour
         GUIManager.instance.UpdateGameText(currentTime,score);
     }
 
-    public void ResetPlayer(Vector3 pos, Vector3 rot)
+    void ResetPlayer()
     {
-        player.fn_ZeroRigidBodyMomentum();
-        player.transform.position = pos;
-        player.transform.eulerAngles = rot;
     }
     public void ResetLevel()
     {
-        LevelManager.instance.RestartLevel();
+        //replace collectibles
+        foreach (GameObject collectible in collectibles)
+        {
+            collectible.SetActive(true);
+        }
+        
+        //replace player
+        
+        player.fn_ZeroRigidBodyMomentum();
+        player.transform.position = spawnPoint.transform.position;
+        player.transform.eulerAngles = spawnPoint.transform.eulerAngles;
+        
+        //reset run-specific values
+        
         score = 0;
         currentTime = 0f;
+        
     }
 
     public void CollectPickup(int value)

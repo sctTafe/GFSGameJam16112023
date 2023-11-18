@@ -28,7 +28,7 @@ public class Controller : MonoBehaviour //interface MonoBehavior provides method
     private void Start()
     {
         //assign rigidbody
-        rb = GetComponent<Rigidbody>();
+        rb = gameObject.GetComponent<Rigidbody>();
         //lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -144,6 +144,9 @@ public class Controller : MonoBehaviour //interface MonoBehavior provides method
     }
     public void fn_ZeroRigidBodyMomentum()
     {
-        rb.velocity = Vector3.zero;
+        if (rb != null)
+        {
+            rb.velocity = Vector3.zero;
+        }
     }
 }

@@ -46,6 +46,9 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
+    public int maxAirJumps = 1;
+    public float airJumpMultiplier = 2f;
+    private int airJumps = 0;
     bool readyToJump;
 
     [Header("Crouching")]
@@ -116,11 +119,19 @@ public class PlayerController : MonoBehaviour
         StateHandler();
         //TextStuff();
 
+        if (state != MovementState.air)
+        {
+            airJumps = 0;
+        }
+        
         // handle drag
         if (grounded)
+        {
             rb.drag = groundDrag;
+        }
         else
             rb.drag = 0;
+        
     }
 
     private void FixedUpdate()
@@ -134,13 +145,26 @@ public class PlayerController : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         // when to jump
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (Input.GetKeyDown(jumpKey) && readyToJump)
         {
-            readyToJump = false;
+            if (grounded)
+            {
+                readyToJump = false;
 
-            Jump();
+                Jump(jumpForce);
 
-            Invoke(nameof(ResetJump), jumpCooldown);
+                Invoke(nameof(ResetJump), jumpCooldown);
+            }
+            else if (airJumps < maxAirJumps && state == MovementState.air)
+            {
+                Debug.Log(("AirJump!"));
+                readyToJump = false;
+
+                Jump(jumpForce*airJumpMultiplier);
+                airJumps += 1;
+
+                Invoke(nameof(ResetJump), jumpCooldown);
+            }
         }
 
         // start crouch
@@ -302,14 +326,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Jump()
+    private void Jump(float force)
     {
         exitingSlope = true;
 
         // reset y velocity
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        rb.AddForce(transform.up * force, ForceMode.Impulse);
     }
     private void ResetJump()
     {

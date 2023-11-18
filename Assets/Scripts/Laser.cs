@@ -37,7 +37,7 @@ public class Laser : MonoBehaviour
             }
         }
     }
-    public void fn_ToggleStomperOn()
+    public void fn_ToggleLaserOn()
     {
         disabled = !disabled;
     }

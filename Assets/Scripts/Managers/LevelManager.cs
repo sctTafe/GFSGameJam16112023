@@ -5,10 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private GameObject spawnPoint;
-    
-    private GameObject[] collectibles;
-    
     public static LevelManager instance;
 
     void Awake()
@@ -27,7 +23,6 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        collectibles = GameObject.FindGameObjectsWithTag("Collectible");
     }
     // Call this function to show the mouse cursor
     public void ShowCursor()
@@ -47,16 +42,6 @@ public class LevelManager : MonoBehaviour
     {
         Debug.Log("Loading "+nextSceneName);
         SceneManager.LoadScene(nextSceneName);
-    }
-
-    public void RestartLevel()
-    {
-        foreach (GameObject collectible in collectibles)
-        {
-            collectible.SetActive(true);
-        }
-
-        GameManager.instance.ResetPlayer(spawnPoint.transform.position, spawnPoint.transform.eulerAngles);
     }
 
     public void ChangeToMainMenu()
