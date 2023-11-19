@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode sprintKey = KeyCode.LeftShift;
     public KeyCode crouchKey = KeyCode.LeftControl;
+    public KeyCode resetKey = KeyCode.R;
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -145,6 +146,12 @@ public class PlayerController : MonoBehaviour
 
     private void MyInput()
     {
+        if (Input.GetKeyDown(resetKey))
+        {
+            GameManager.instance.ResetLevel();
+            return;
+        }
+        
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
@@ -348,8 +355,11 @@ public class PlayerController : MonoBehaviour
     }
 
     public void ResetVelocity()
-    { 
-        rb.velocity = Vector3.zero;
+    {
+        if (rb != null)
+        {
+            rb.velocity = Vector3.zero;
+        }
     }
 
     public bool OnSlope()

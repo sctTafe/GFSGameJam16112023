@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
         currentTime += Time.deltaTime;
         
         GUIManager.instance.UpdateGameText(currentTime,score);
+        
+        
     }
 
     void ResetPlayer()
