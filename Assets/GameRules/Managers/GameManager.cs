@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -31,7 +33,7 @@ public class GameManager : MonoBehaviour
     
     void Start()
     {
-        LevelManager.instance.HideCursor();
+        GUIManager.instance.HideCursor();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         collectibles = GameObject.FindGameObjectsWithTag("Collectible");
         
@@ -42,15 +44,10 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         currentTime += Time.deltaTime;
-        
-        GUIManager.instance.UpdateGameText(currentTime,score);
-        
-        
+
+        GUIManager.instance.UpdateGameText(currentTime, score);
     }
 
-    void ResetPlayer()
-    {
-    }
     public void ResetLevel()
     {
         //replace collectibles
@@ -70,6 +67,15 @@ public class GameManager : MonoBehaviour
         score = 0;
         currentTime = 0f;
         
+        player.lockMovement(false);
+        GUIManager.instance.HideCursor();
+    }
+
+    public void CompleteLevel(string nextSceneName)
+    {
+        player.lockMovement(true);
+        GUIManager.instance.DisplayEndLevelUI();
+        GUIManager.instance.ShowCursor();
     }
 
     public void CollectPickup(int value)

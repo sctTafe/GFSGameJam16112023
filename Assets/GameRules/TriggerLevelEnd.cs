@@ -10,7 +10,7 @@ public class TriggerLevelEnd : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            LevelManager.instance.ChangeToScene(nextSceneName);   
+            GameManager.instance.CompleteLevel(nextSceneName);
         }
     }
 }

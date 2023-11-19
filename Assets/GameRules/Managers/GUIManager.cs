@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class GUIManager : MonoBehaviour
 {
@@ -15,8 +16,20 @@ public class GUIManager : MonoBehaviour
     
     [SerializeField] private GameObject GameUI;
     //[SerializeField] private GameObject PauseUI;
-    //[SerializeField] private GameObject LevelEndUI;
+    [SerializeField] private GameObject LevelEndUI;
     
+    public void ShowCursor()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    // Call this function to hide the mouse cursor
+    public void HideCursor()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
     
     public static GUIManager instance;
 
@@ -31,8 +44,12 @@ public class GUIManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
-    // Start is called before the first frame update
+
+    void Start()
+    {
+        GameUI.SetActive(true);
+        LevelEndUI.SetActive(false);
+    }
 
     public void UpdateGameText(float time, int score)
     {
@@ -40,10 +57,11 @@ public class GUIManager : MonoBehaviour
         scoreText.SetText(score.ToString());
     }
     
-    public void EndLevel()
+    public void DisplayEndLevelUI()
     {
+        Debug.Log("End!");
         GameUI.SetActive((false));
         //PauseUI.SetActive(false);
-        //LevelEndUI.SetActive(true);
+        LevelEndUI.SetActive(true);
     }
 }

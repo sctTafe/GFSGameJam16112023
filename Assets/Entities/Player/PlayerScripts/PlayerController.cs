@@ -72,9 +72,10 @@ public class PlayerController : MonoBehaviour
     private RaycastHit slopeHit;
     private bool exitingSlope;
 
-
+    public bool disabled = false;
+    
     public Transform orientation;
-    public Transform camera;
+    public PlayerCam playerCamera;
 
     float horizontalInput;
     float verticalInput;
@@ -88,6 +89,7 @@ public class PlayerController : MonoBehaviour
     public MovementState state;
     public enum MovementState
     {
+        Disabled,
         walking,
         sprinting,
         wallrunning,
@@ -118,7 +120,15 @@ public class PlayerController : MonoBehaviour
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
-        MyInput();
+        if (state != MovementState.Disabled)
+        {
+            MyInput();
+        }
+        else
+        {
+            horizontalInput = 0f;
+            verticalInput = 0f;
+        }
         SpeedControl();
         StateHandler();
         
@@ -130,7 +140,11 @@ public class PlayerController : MonoBehaviour
         }
         
         // handle drag
-        if (grounded)
+        if (state == MovementState.Disabled)
+        {
+            rb.drag = 1;
+        }
+        else if (grounded)
         {
             rb.drag = groundDrag;
         }
@@ -199,8 +213,14 @@ public class PlayerController : MonoBehaviour
 
     private void StateHandler()
     {
+        // Mode - Disabled
+        if (disabled)
+        {
+            state = MovementState.Disabled;
+        }
+        
         // Mode - Wallrunning
-        if (wallrunning)
+        else if (wallrunning)
         {
             state = MovementState.wallrunning;
             desiredMoveSpeed = wallrunSpeed;
@@ -397,5 +417,11 @@ public class PlayerController : MonoBehaviour
     {
         float mult = Mathf.Pow(10.0f, (float)digits);
         return Mathf.Round(value * mult) / mult;
+    }
+
+    public void lockMovement(bool value)
+    {
+        disabled = value;
+        playerCamera.lookDisabled = value;
     }
 }
