@@ -422,6 +422,10 @@ public class PlayerController : MonoBehaviour
     public void lockMovement(bool value)
     {
         disabled = value;
+    }
+
+    public void lockAiming(bool value)
+    {
         playerCamera.lookDisabled = value;
     }
 }

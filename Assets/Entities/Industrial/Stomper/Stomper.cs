@@ -10,7 +10,6 @@ public class Stomper : MonoBehaviour
     public bool disabled = false;
     public Animation stomp;
 
-    public GameObject StomperObject;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,13 +32,5 @@ public class Stomper : MonoBehaviour
     public void fn_ToggleStomperOn()
     {
         disabled = !disabled;
-    }
-
-    public void OnCollisionStay(Collision other)
-    {
-        if (other.transform.CompareTag("Player") && Vector3.Distance(StomperObject.transform.position, transform.position) < 2)
-        {
-            Debug.Log("Dead");
-        }
     }
 }

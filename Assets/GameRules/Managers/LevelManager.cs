@@ -34,4 +34,9 @@ public class LevelManager : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenuScene");
     }
+
+    public void RetryLevel()
+    {
+        GameManager.instance.ResetLevel();
+    }
 }
