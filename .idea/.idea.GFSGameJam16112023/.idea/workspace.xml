@@ -15,6 +15,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$USER_HOME$/Downloads/TimeManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Entities/Player/PlayerScripts/Tether.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.probuilder@5.1.1/Editor/EditorCore/ProBuilderEditor.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -95,7 +96,9 @@
       <workItem from="1700264121915" duration="147000" />
       <workItem from="1700266476377" duration="47000" />
       <workItem from="1700273239149" duration="20920000" />
-      <workItem from="1700319526479" duration="13589000" />
+      <workItem from="1700319526479" duration="14177000" />
+      <workItem from="1700382919853" duration="4869000" />
+      <workItem from="1700389503048" duration="1169000" />
     </task>
     <servers />
   </component>
@@ -114,12 +117,6 @@
           <url>file://$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerController.cs</url>
           <properties documentPath="C:\Users\tom\UnityProjects\GFSGameJam16112023\Assets\Scripts\PlayerScripts\PlayerController.cs" initialLine="0" isMultiMethodBreakpoint="true">
             <option name="multiMethodBreakpoint" value="true" />
-            <startOffsets>
-              <option value="-1" />
-            </startOffsets>
-            <endOffsets>
-              <option value="-1" />
-            </endOffsets>
           </properties>
           <option name="timeStamp" value="1" />
         </line-breakpoint>

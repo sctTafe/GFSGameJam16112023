@@ -89,6 +89,7 @@ public class PlayerController : MonoBehaviour
     public MovementState state;
     public enum MovementState
     {
+        Tethered,
         Disabled,
         walking,
         sprinting,
@@ -98,6 +99,7 @@ public class PlayerController : MonoBehaviour
         air
     }
 
+    public bool tethered;
     public bool sliding;
     public bool crouching;
     public bool wallrunning;
@@ -217,6 +219,11 @@ public class PlayerController : MonoBehaviour
         if (disabled)
         {
             state = MovementState.Disabled;
+        }
+        
+        else if (tethered)
+        {
+            state = MovementState.Tethered;
         }
         
         // Mode - Wallrunning
