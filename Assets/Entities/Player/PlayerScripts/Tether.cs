@@ -40,7 +40,7 @@ public class Tether : MonoBehaviour
         if (Physics.Raycast(camera.transform.position, camera.forward, out hit, tetherRange))
         {
             crosshair.color = Color.green;
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKeyDown(KeyCode.Mouse1))
             {
                 StartTether(hit.point);
             }
@@ -50,7 +50,7 @@ public class Tether : MonoBehaviour
             crosshair.color = Color.white;
         }
 
-        if (Input.GetKeyUp(KeyCode.Mouse0) && player.tethered)
+        if (Input.GetKeyUp(KeyCode.Mouse1) && player.tethered)
         {
             StopTether();
         }
